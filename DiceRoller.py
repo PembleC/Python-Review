@@ -32,4 +32,4 @@ total = 0
 for number in list_of_rolls:
     total += number
 
-print("The total of your rolls were: ", total)
+print("The total of your rolls were: ", total, "\n")

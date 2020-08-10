@@ -28,13 +28,13 @@ print("That's Correct! I was thinking of the number: ", computers_number)
 print("It took you", attempts, "tries to guess my number.")
 
 if attempts == 1:
-    print("WOW! I bow before your god tier guessing strategy!!!!")
+    print("WOW! I bow before your god tier guessing strategy!!!! \n")
 
 elif attempts <= 3:
-    print("Amazing job!!!")
+    print("Amazing job!!!\n")
 
 elif attempts <= 5:
-    print("Great job!!")
+    print("Great job!!\n")
 
 elif attempts <= 10:
-    print("Good job!")
+    print("Good job!\n")

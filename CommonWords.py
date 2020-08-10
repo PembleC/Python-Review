@@ -9,12 +9,17 @@ import sys
 number_of_args = len(sys.argv)
 print("The number of arguments passed:", number_of_args)
 arg_list = str(sys.argv)
-print("Argument List: ", arg_list)
+print("The Arguments List: ", arg_list)
 
-file_number = 1
-for file_number in range(1,number_of_args):
-    print("Reading file:", arg_list[file_number])
-    cur_file = open(arg_list[file_number], "r", )
+sys.argv[0]
+
+for count in range(0, number_of_args):
+    if count == 0:
+        print("nothing to do for THIS file")
+        continue
+
+    print("Reading file:", sys.argv[count])
+    cur_file = open(sys.argv[count], "r", )
 
     print(cur_file.readline)
 
