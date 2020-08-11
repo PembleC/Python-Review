@@ -30,12 +30,12 @@ def appendToLists(seg_list, sequence):
 
 def dictionaryOccurances(results, sequence):
     for phrase_index in range(0, len(sequence)):
-        #print("looking at", phrase_index, "for:", sequence[phrase_index])
-        if sequence[phrase_index] not in results:
-            # Count how many times each phrase is used
-            occurrences = sequence.count(sequence[phrase_index])
-            #print(occurrences)
-            results[sequence[phrase_index]] = occurrences
+        key = sequence[phrase_index]
+        #print(key)
+        if key in results:
+            results[key] += 1
+        else:
+            results[key] = 1
     return
 
 
@@ -93,10 +93,22 @@ def main():
 
         # Sort the dictionary by value
         sorted_phrases = sorted(final_results.items(), key=lambda x: x[1], reverse=True)
+        #print(sorted_phrases)
 
         # Print the phrases and their occurrences
-        for i in sorted_phrases:
-            print(i[0], " -> " ,i[1])
+        if len(sorted_phrases) <= 100:
+            for i in sorted_phrases:
+                if i[0].count(' ') == 2:
+                    print(i[0], " -> ", i[1])
+        else:
+            counter = 0
+            for i in sorted_phrases:
+                if i[0].count(' ') == 2:
+                    counter += 1
+                    print(i[0], " -> ", i[1])
+                    if counter == 100:
+                        break
+        print("\n")
 
         cur_file.close()
 
@@ -108,9 +120,9 @@ if __name__ == "__main__":
 
 """
 [X] The program accepts as arguments a list of one or more file paths (e.g. ./solution.rb file1.txt file2.txt ...).
-[] The program also accepts input on stdin (e.g. cat file1.txt | ./solution.rb).
+[X] The program also accepts input on stdin (e.g. cat file1.txt | ./solution.rb).
 [X] The program outputs a list of the 100 most common three-word sequences in the text, along with a count of how many times each occurred in the text. For example: 231 - i will not, 116 - i do not, 105 - there is no, 54 - i know not, 37 - i am not …
 [X] The program ignores punctuation, line endings, and is case insensitive (e.g. “I love\nsandwiches.” should be treated the same as "(I LOVE SANDWICHES!!)")
 [X] The program is capable of processing large files and runs as fast as possible.
-[] The program should be tested. Provide a test file for your solution.
+[X] The program should be tested. Provide a test file for your solution.
 """
