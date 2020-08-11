@@ -1,82 +1,83 @@
 """
-
-8/10/2020
+8/11/2020
 New Relic Code Challenge
 Find 100 most common three-word sequences
 """
+
 import sys
 import re
 
+# Get the command line arguments
 number_of_args = len(sys.argv)
 print("The number of arguments passed:", number_of_args)
 arg_list = str(sys.argv)
 print("The Arguments List: ", arg_list)
 
 for count in range(1, number_of_args):  # If you desire to parse multiple files
-    # if count == 0:
-    #     print("nothing to do for THIS file")
-    #     continue
 
     print("Reading file:", sys.argv[count])
     cur_file = open(sys.argv[count], "r", )
 
     sequence_one = []
     sequence_two = []
-    sequence_zero = []
+    sequence_three = []
+
+    first_word = ""
+    second_word = ""
 
     line_num = 0
     for line in cur_file:
-        #print("Line: ", line_num)
-        line_num += 1
         word_num = 0
+        for word in line.split():
+            if word_num > 1:
+                continue
+            elif word_num == 0:
+                first_word = word
+            elif word_num == 1:
+                second_word = word
+            word_num += 1
+        line_num += 1
+
+        line_minus_first = line.replace(first_word,"",1)
+        line_minus_second = line_minus_first.replace(second_word,"",1)
+
+
+        #removePuncAndSplit(line)
 
         # Remove the punctuation from the line
         no_punc_line = re.sub(r'[^\w\s]', '', line.lower())
+        no_punc_line_mf = re.sub(r'[^\w\s]', '', line_minus_first.lower())
+        no_punc_line_ms = re.sub(r'[^\w\s]', '', line_minus_second.lower())
         #print(no_punc_line)
 
-        # Split every three words
+        # Split every three words using regular expressions
         word_seg_list = re.split('((?:\w+(?:\s)){3})', no_punc_line)
+        word_seg_list_mf = re.split('((?:\w+(?:\s)){3})', no_punc_line_mf)
+        word_seg_list_ms = re.split('((?:\w+(?:\s)){3})', no_punc_line_ms)
+        #print(word_seg_list)
 
-        # Filter out the blank lines
+
+        # Filter out the blank lines from the list
         results = list(filter(None, word_seg_list))
+        results_mf = list(filter(None, word_seg_list_mf))
+        results_ms = list(filter(None, word_seg_list_ms))
         #print(results)
+
         list_length = len(results)
+        list_length_mf = len(results_mf)
+        list_length_ms = len(results_ms)
 
         for seg_num in range(0, list_length):
             #print(results[seg_num].rstrip())
             sequence_one.append(results[seg_num].rstrip())
 
+        for seg_num in range(0, list_length_mf):
+            #print(results[seg_num].rstrip())
+            sequence_two.append(results_mf[seg_num].rstrip())
 
-
-
-
-
-        #print("\n")
-
-
-
-    #     for word in line.split():
-    #         #print("Word: ", word_num)
-    #         word_num += 1
-    #         #print(word_num % 3)
-    #         if (word_num % 3 == 1):
-    #             sequence_one.append(word.lower())
-    #         elif (word_num % 3 == 2):
-    #             sequence_two.append(word.lower())
-    #         elif (word_num % 3 == 0):
-    #             sequence_zero.append(word.lower())
-    #
-    #         print(word)
-
-
-    print("\n")
-    print("Sequence one is: ", sequence_one)
-    print("\n")
-    # print(sequence_two)
-    # print("\n")
-    # print(sequence_zero)
-    # print("\n")
-
+        for seg_num in range(0, list_length_ms):
+            #print(results[seg_num].rstrip())
+            sequence_three.append(results_ms[seg_num].rstrip())
 
 
 
@@ -90,12 +91,27 @@ for count in range(1, number_of_args):  # If you desire to parse multiple files
             #print(occurrences)
             final_results[sequence_one[phrase_index]] = occurrences
 
-    print(final_results)
+    for phrase_index in range(0, len(sequence_two)):
+        if sequence_two[phrase_index] not in final_results:
+            # Count how many times each phrase is used
+            occurrences = sequence_two.count(sequence_two[phrase_index])
+            #print(occurrences)
+            final_results[sequence_two[phrase_index]] = occurrences
 
-    # sort the keys according to the values:
-    #sorted_names = sorted(scores, key=scores.__getitem__)
-    #for k in sorted_names:
-    #print("{} : {}".format(k, scores[k]))
+    for phrase_index in range(0, len(sequence_three)):
+        if sequence_three[phrase_index] not in final_results:
+            # Count how many times each phrase is used
+            occurrences = sequence_three.count(sequence_three[phrase_index])
+            #print(occurrences)
+            final_results[sequence_three[phrase_index]] = occurrences
+
+
+    # Sort the dictionary by value
+    sorted_phrases = sorted(final_results.items(), key=lambda x: x[1], reverse=True)
+
+    # Print the phrases and their occurrences
+    for i in sorted_phrases:
+        print(i[0], "\t->\t" ,i[1])
 
 
 
