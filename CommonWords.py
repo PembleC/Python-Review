@@ -50,6 +50,10 @@ def main():
     arg_list = str(sys.argv)
     print("The Arguments List: ", arg_list)
 
+    if number_of_args < 2:
+        print("\nYou need to pass in a text file as well. Try again.\n")
+        return
+
     # If you desire to parse multiple files from command line
     for count in range(1, number_of_args):
         # Create Variables
