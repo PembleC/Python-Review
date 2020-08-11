@@ -8,6 +8,7 @@ Find 100 most common three-word sequences
 import sys
 import re
 
+
 # Helper Functions
 def removePuncAndSplit(line):
     # Remove the punctuation from the line
@@ -22,23 +23,26 @@ def appendToLists(seg_list, sequence):
     #print("This is results ", results)
     list_length = len(results)
     for seg_num in range(0, list_length):
-        #print(results[seg_num].rstrip())
+        # Remove the whitespace
         seq = results[seg_num].strip()
         if seq != '':
+            # Append it to my sequences
             sequence.append(seq)
     return
 
 def dictionaryOccurances(results, sequence):
     for phrase_index in range(0, len(sequence)):
         key = sequence[phrase_index]
-        #print(key)
         if key in results:
+            # Increase the counter for that 3-word phrase
             results[key] += 1
         else:
+            # Add it to my dictionary
             results[key] = 1
     return
 
 
+# Main Function
 def main():
     # Get the command line arguments
     number_of_args = len(sys.argv)
@@ -46,19 +50,18 @@ def main():
     arg_list = str(sys.argv)
     print("The Arguments List: ", arg_list)
 
-    for count in range(1, number_of_args):  # If you desire to parse multiple files
+    # If you desire to parse multiple files from command line
+    for count in range(1, number_of_args):
+        # Create Variables
+        sequence_one = []
+        sequence_two = []
+        sequence_three = []
+        first_word = ""
+        second_word = ""
 
         print("Reading file:", sys.argv[count], "\n")
         cur_file = open(sys.argv[count], "r", )
 
-        sequence_one = []
-        sequence_two = []
-        sequence_three = []
-
-        first_word = ""
-        second_word = ""
-
-        line_num = 0
         for line in cur_file:
             word_num = 0
             for word in line.split():
@@ -69,8 +72,8 @@ def main():
                 elif word_num == 1:
                     second_word = word
                 word_num += 1
-            line_num += 1
 
+            # Gives me all possible 3 word combinations
             line_minus_first = line.replace(first_word,"",1)
             line_minus_second = line_minus_first.replace(second_word,"",1)
 
@@ -96,18 +99,13 @@ def main():
         #print(sorted_phrases)
 
         # Print the phrases and their occurrences
-        if len(sorted_phrases) <= 100:
-            for i in sorted_phrases:
-                if i[0].count(' ') == 2:
-                    print(i[0], " -> ", i[1])
-        else:
-            counter = 0
-            for i in sorted_phrases:
-                if i[0].count(' ') == 2:
-                    counter += 1
-                    print(i[0], " -> ", i[1])
-                    if counter == 100:
-                        break
+        counter = 0
+        for i in sorted_phrases:
+            if i[0].count(' ') == 2:
+                counter += 1
+                print(i[0], " -> ", i[1])
+                if counter == 100:
+                    break
         print("\n")
 
         cur_file.close()

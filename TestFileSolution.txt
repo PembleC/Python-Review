@@ -1,13 +1,17 @@
 The number of arguments passed: 2
-The Arguments List:  ['CommonWords.py', './TestWordFile.txt']
-Reading file: ./TestWordFile.txt 
+The Arguments List:  ['CommonWords.py', './TestFile.txt']
+Reading file: ./TestFile.txt 
 
+i love hikes  ->  9
 am a really  ->  4
 a really nice  ->  4
 i am a  ->  4
 really nice guy  ->  4
 nice guy i  ->  3
+i said i  ->  3
+said i love  ->  3
 guy i am  ->  3
+i am good  ->  2
 this is just  ->  1
 a random test  ->  1
 of words that  ->  1
@@ -21,20 +25,17 @@ i dont think  ->  1
 this code challenge  ->  1
 should be very  ->  1
 hard but we  ->  1
-will see  ->  1
 i really hope  ->  1
 i get this  ->  1
 job because it  ->  1
 would be awesome  ->  1
 to work at  ->  1
 new relic i  ->  1
-nice guy  ->  1
-i am good  ->  1
 at basketball i  ->  1
 am good with  ->  1
 words i am  ->  1
 alright at soccer  ->  1
-i love hikes  ->  1
+love hikes i  ->  1
 is just a  ->  1
 random test of  ->  1
 words that could  ->  1
@@ -43,25 +44,22 @@ a text file  ->  1
 i wrote this  ->  1
 just to create  ->  1
 a small text  ->  1
-file sample  ->  1
 dont think this  ->  1
 code challenge should  ->  1
 be very hard  ->  1
 but we will  ->  1
-see  ->  1
 really hope i  ->  1
 get this job  ->  1
 because it would  ->  1
 be awesome to  ->  1
 work at new  ->  1
 relic i am  ->  1
-guy  ->  1
 am good at  ->  1
 basketball i am  ->  1
 good with words  ->  1
 i am alright  ->  1
 at soccer i  ->  1
-love hikes  ->  1
+hikes i said  ->  1
 just a random  ->  1
 test of words  ->  1
 that could be  ->  1
@@ -70,7 +68,6 @@ text file i  ->  1
 wrote this just  ->  1
 to create a  ->  1
 small text file  ->  1
-sample  ->  1
 think this code  ->  1
 challenge should be  ->  1
 very hard but  ->  1
@@ -84,4 +81,5 @@ good at basketball  ->  1
 with words i  ->  1
 am alright at  ->  1
 soccer i love  ->  1
-hikes  ->  1
+
+
