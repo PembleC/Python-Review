@@ -6,23 +6,38 @@ Python GUI
 from tkinter import *
 
 
+
+
+
+### Functions ###
 def printName():
     print("Carson Pemble")
 
 def printNameEvent(event):
     print("Carson Pemble from Event")
 
+def leftClick(event):
+    print("Left Clicked")
+
+def midClick(event):
+    print("Middle Clicked")
+
+def rightClick(event):
+    print("Right Clicked")
+
+def close_window():
+    root.destroy()
 
 
-
+### tkinter Start ###
 root = Tk()     # start the window
 
 
 ### Frames ###
-topFrame = Frame(root)      # Top invisible section
+topFrame = Frame(root, width=600, height=500)      # Top invisible section
 topFrame.pack(side=TOP)
 
-bottomFrame = Frame(root)   # Bottom invisible section
+bottomFrame = Frame(root, width=600, height=500)   # Bottom invisible section
 bottomFrame.pack(side=BOTTOM)
 
 
@@ -52,7 +67,11 @@ button2 = Button(bottomFrame, text="Button 2", fg="blue")
 button2.bind("<Button-1>", printNameEvent)                      # Another option for button clicks
 
 button3 = Button(bottomFrame, text="Button 3", fg="green")
-button4 = Button(bottomFrame, text="Button 4", fg="black")
+button3.bind("<Button-1>", leftClick)
+button3.bind("<Button-2>", midClick)
+button3.bind("<Button-3>", rightClick)
+
+button4 = Button(bottomFrame, text="Button 4", fg="black", command=close_window)
 
 button1.pack(side=LEFT)
 button2.pack(side=LEFT)
